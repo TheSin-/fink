@@ -1,7 +1,7 @@
 Package: expat1
 Version: 2.2.8
 Revision: 1
-BuildDepends: fink-package-precedence
+#BuildDepends: fink-package-precedence
 Depends: %N-shlibs (= %v-%r)
 Replaces: expat
 Conflicts: expat
@@ -18,12 +18,14 @@ ConfigureParams: --without-docbook --disable-static
 SetCFLAGS: -g -O2 -fshort-wchar
 CompileScript: <<
 	%{default_script}
-	fink-package-precedence --prohibit-bdep=%n .
+# No Essential so should not be used
+#	fink-package-precedence --prohibit-bdep=%n .
 <<
 InfoTest: <<
 	TestScript: <<
 		make check || exit 2
-		fink-package-precedence --prohibit-bdep=%n .
+# No Essential so should not be used
+#		fink-package-precedence --prohibit-bdep=%n .
 	<<
 <<
 InstallScript: make install DESTDIR=%d docdir=%p/share/doc/%n
