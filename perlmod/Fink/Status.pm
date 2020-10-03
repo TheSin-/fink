@@ -147,9 +147,8 @@ sub query_package {
 	}
 
 	$self->validate();
-	if (exists $self->{$pkgname} and
-	    ($self->{$pkgname}->{status} =~ /\s+installed$/i or
-	     $self->{$pkgname}->{status} =~ /\s+virtual$/i)) {
+
+	if (exists $self->{$pkgname} and $self->{$pkgname}->{status} =~ /\s+installed$/i) {
 		return $self->{$pkgname}->{version};
 	}
 	return undef;
