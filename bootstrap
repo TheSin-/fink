@@ -690,19 +690,6 @@ if (($arch eq "x86_64") and ($distribution eq "10.5")) {
 }
 }
 
-### create f-v-p bootstrap
-
-{
-print "Creating f-v-p bootstrap configuration...\n";
-
-my $cmd = 'sed -e "s|@BASEPATH@|' . $installto . '|g" -e "s|@LIBPATH@|' . $homebase . '/perlmod|g" < "fink-virtual-pkgs.in" > "fink-virtual-pkgs-bootstrap";';
-   $cmd .= "chmod +x fink-virtual-pkgs-bootstrap;";
-
-if (&execute($cmd, quiet=>0)) {
-	exit 1;
-}
-}
-
 ### load the Fink modules
 
 require Fink::Config;
@@ -765,8 +752,7 @@ if ($distribution eq "10.6") {
 
 $cmd = "/usr/bin/env -i $perlexe $cmd $installto";
 
-&execute($cmd, quiet=>0);
-if (&execute($cmd, quiet=>0)) {
+if (&execute($cmd, quiet=>1)) {
 	print "\nERROR: Bootstrap phase 2 failed!\n";
 	exit 1;
 }
